@@ -1,0 +1,37 @@
+<div class="phx-hero text-5xl font-bold bg-gray-500">
+  <h1>Your Saved Posts</h1>
+</div>
+
+<div class="container max-w-screen-md mx-auto mx-20">
+  <%# List of Saves %>
+    <ol class="list-decimal font-bold mx-10">
+      <%= for item <- @saves["data"]["children"] do %>
+      	
+        <%# Post Format %>
+        <%= if item["kind"] == "t3" do %>
+      		<li class="m-0">
+            <div class="bg-gray-300 p-5">
+        			<a href="http://www.reddit.com<%= item["data"]["permalink"] %>" target="new"  class="font-semibold">
+                <%= raw(item["data"]["title"]) %>
+              </a>
+            </div>
+    			</li>
+        <% end %>
+
+      	<%# Comment Format %>
+        <%= if item["kind"] == "t1" do %>
+      		<li class="m-0">
+            <div class="bg-orange-200 p-5">
+              <%= content_tag(:p, "#{item["data"]["subreddit_name_prefixed"]}: ", class: "text-red-700") %>
+        			<%=# item["data"]["subreddit_name_prefixed"] %>
+              <a href="http://www.reddit.com<%= item["data"]["permalink"] %>" target="new" class="font-semibold"><%= raw(item["data"]["link_title"]) %></a>
+    				  <div class="font-normal px-5"><%= text_to_html(item["data"]["body"], [attributes: [class: "py-2 leading-tight"]]) %></div>
+            </div>
+    			</li>
+    		<% end %>
+      <% end %>
+    </ol>
+    <div>
+      <a>Load More</a>
+    </div>
+</section>

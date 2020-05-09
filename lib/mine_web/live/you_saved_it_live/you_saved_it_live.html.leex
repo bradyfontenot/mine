@@ -1,0 +1,71 @@
+<div class="text-5xl font-bold text-center" >
+  <h1>Saved Posts</h1>
+</div>
+
+<div class="container shadow-xl bg-apink max-w-screen-md mx-auto mx-20 p-4">
+  <div class="flex flex-row flex-wrap items-center">
+    <%# <div class="self-center"> %>
+      <%= f = form_for :query, "#", [phx_change: :search, class: "self-center"] %>
+        <%= text_input f, :query, [class: "border border-black p-2", placeholder: "Search"] %>
+        <%# <input type="text" phx-value="query" phx-change="search" placeholder="Search" class="border border-black p-2" > %>
+      </form>
+    <%# </div> %>
+    <div>
+      <button class="ml-4 px-3 py-2 text-sm font-medium text-black border border-black hover:border-white focus:border-white focus:outline-none focus:text-black focus:bg-apink">All</button>
+    </div>
+    <div>
+      <button class="ml-4 px-3 py-2 text-sm font-medium text-black border border-black hover:border-white focus:border-white focus:outline-none focus:text-black focus:bg-apink">Posts</button>
+    </div>
+    <div>
+      <button class="ml-4 px-3 py-2 text-sm font-medium text-black border border-black hover:border-white focus:border-white focus:outline-none focus:text-black focus:bg-apink">Comments</button>
+    </div>
+  </div>
+  <%# List of Saves %>
+  <ol id="list" phx-update="replace" class="divide-y divide-black bg-apink list-decimal font-bold mx-10">
+    <%#= if @saves != nil do %>
+    <%= for item <- @saves do %>
+      
+      <%# Post Format %>
+      <%= if item["kind"] == "t3" do %>
+        <li id="<%= item["data"]["id"] %>" class="m-0 py-5">
+          <%# subreddit %>
+          <div class="py-0 -my-1 italic font-normal text-sm"><%= "#{item["data"]["subreddit_name_prefixed"]}: " %></div>
+          
+          <%# Post Title %>
+          <div>
+            <a href="http://www.reddit.com<%= item["data"]["permalink"] %>" target="new"  class="font-semibold">
+              <%= raw(item["data"]["title"]) %>
+            </a>
+          </div>
+        </li>
+      <% end %>
+
+      <%# Comment Format %>
+      <%= if item["kind"] == "t1" do %>
+        <li id="<%= item["data"]["id"] %>" class="m-0 py-5">
+         
+         <%# subreddit %>
+          <div class="py-0 my-0 italic font-normal text-sm">
+            <%= "#{item["data"]["subreddit_name_prefixed"]}: " %>
+          </div>
+         
+          <%# Comment Title %>
+          <div class="py-0 -my-1">
+            <a href="http://www.reddit.com<%= item["data"]["permalink"] %>" target="new" class="font-semibold"><%= raw(item["data"]["link_title"]) %></a>
+          </div>
+         
+          <%# Comment Body %>
+          <div class="font-serif font-normal px-5">
+            <%= text_to_html(item["data"]["body"], [attributes: [class: "py-2 leading-tight"]]) %> 
+          </div>
+        </li>
+      <% end %>
+    <% end %>
+  </ol>
+  <div>
+    <button phx-click="load_more">
+      <a>Load More</a>
+    </button>
+  </div>
+  <%# end %>
+</div>

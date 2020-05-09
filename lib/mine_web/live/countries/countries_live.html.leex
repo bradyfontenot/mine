@@ -1,0 +1,7 @@
+<div>
+  <%= if @data != "" do %>
+  <%= for country <- @data do %>
+    <%= country["name"] %>
+  <% end %>
+  <% end %>
+</div>
