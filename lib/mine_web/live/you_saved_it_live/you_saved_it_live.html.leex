@@ -6,18 +6,18 @@
   <div class="flex flex-row flex-wrap items-center">
     <%# <div class="self-center"> %>
       <%= f = form_for :query, "#", [phx_change: :search, class: "self-center"] %>
-        <%= text_input f, :query, [class: "border border-black p-2", placeholder: "Search"] %>
+        <%= search_input f, :query, [class: "border border-black p-2", placeholder: "Search"] %>
         <%# <input type="text" phx-value="query" phx-change="search" placeholder="Search" class="border border-black p-2" > %>
       </form>
     <%# </div> %>
     <div>
-      <button class="ml-4 px-3 py-2 text-sm font-medium text-black border border-black hover:border-white focus:border-white focus:outline-none focus:text-black focus:bg-apink">All</button>
+      <button phx-click="all" class="ml-4 px-3 py-2 text-sm font-medium text-black border border-black hover:border-white focus:border-white focus:outline-none focus:text-black focus:bg-apink">All</button>
     </div>
     <div>
-      <button class="ml-4 px-3 py-2 text-sm font-medium text-black border border-black hover:border-white focus:border-white focus:outline-none focus:text-black focus:bg-apink">Posts</button>
+      <button phx-click="posts" class="ml-4 px-3 py-2 text-sm font-medium text-black border border-black hover:border-white focus:border-white focus:outline-none focus:text-black focus:bg-apink">Posts</button>
     </div>
     <div>
-      <button class="ml-4 px-3 py-2 text-sm font-medium text-black border border-black hover:border-white focus:border-white focus:outline-none focus:text-black focus:bg-apink">Comments</button>
+      <button phx-click="comments" class="ml-4 px-3 py-2 text-sm font-medium text-black border border-black hover:border-white focus:border-white focus:outline-none focus:text-black focus:bg-apink">Comments</button>
     </div>
   </div>
   <%# List of Saves %>
@@ -62,10 +62,5 @@
       <% end %>
     <% end %>
   </ol>
-  <div>
-    <button phx-click="load_more">
-      <a>Load More</a>
-    </button>
-  </div>
   <%# end %>
 </div>
