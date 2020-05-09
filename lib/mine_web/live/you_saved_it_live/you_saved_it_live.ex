@@ -51,8 +51,16 @@ defmodule MineWeb.YouSavedItLive do
 
   defp filter_by_type(type, db) do
     
-    Enum.filter(db, fn entry ->
-      entry["kind"] == type end)
+    filtered = 
+      Enum.filter(db, fn entry -> entry["kind"] == type end)
+
+    case type do
+      "t1" ->
+        filtered
+
+      "t3" ->
+        Enum.sort_by(filtered, &(&1["data"]["subreddit_name_prefixed"]), :asc)
+    end
   end
 
   defp filter_by_query(db, query) do
