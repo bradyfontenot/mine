@@ -13,7 +13,7 @@ defmodule Mine.Reddit do
 	@redirect_uri "http://localhost:4000/saved"
 	@scope "identity history"
 	@state "temp_string"
-  @duration "permanent"
+  @duration "temporary"
 	@auth_url "https://ssl.reddit.com/api/v1/authorize?client_id=#{@client_id}&response_type=code&state=#{@state}&redirect_uri=#{@redirect_uri}&duration=#{@duration}&scope=#{@scope}"
 
   def get_auth_url, do: @auth_url
@@ -117,6 +117,11 @@ defmodule Mine.Reddit do
         {:error, _} ->
           {:error, "invalid_grant"}
       end
-    end
+  end
+
+  def filter_by_search(query) do
+    
+    Enum.filter()
+  end
 
 end
