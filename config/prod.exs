@@ -24,25 +24,16 @@ config :mine, MineWeb.Endpoint,
   secret_key_base: secret_key_base,
   transport_options: [socket_opts: [:inet6]]
 
-
-
-
-# config :mine, MineWeb.Endpoint,
-#   http: [
-#     port: String.to_integer(System.get_env("PORT") || "4000"),
-    
-#   ],
-
 # Do not print debug messages in production
 config :logger, level: :info
 
 
-database_url =
-  System.get_env("DATABASE_URL") ||
-    raise """
-    environment variable DATABASE_URL is missing.
-    For example: ecto://USER:PASS@HOST/DATABASE
-    """
+# database_url =
+#   System.get_env("DATABASE_URL") ||
+#     raise """
+#     environment variable DATABASE_URL is missing.
+#     For example: ecto://USER:PASS@HOST/DATABASE
+#     """
 
 config :mine, Mine.Repo,
   ssl: true,
