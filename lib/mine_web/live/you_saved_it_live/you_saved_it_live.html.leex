@@ -1,28 +1,35 @@
-<div class="text-5xl font-bold text-center" >
-  <h1>Saved Posts</h1>
-</div>
 
-<div class="container shadow-xl bg-apink max-w-screen-md mx-auto mx-20 p-4">
-  <div class="flex flex-row flex-wrap items-center">
-    <%# <div class="self-center"> %>
-      <%= f = form_for :query, "#", [phx_change: :search, class: "self-center"] %>
-        <%= search_input f, :query, [class: "border border-black p-2", placeholder: "Search"] %>
-        <%# <input type="text" phx-value="query" phx-change="search" placeholder="Search" class="border border-black p-2" > %>
-      </form>
-    <%# </div> %>
+<div class="fixed max-w-screen flex flex-row mx-auto py-2 flex flex-wrap items-center border-black border-w">
+    <%# Navbar Logo - Top Left  %>
+  <div class="text-2xl font-extrabold relative flex items-center">
+    <%= link("MINE", to: "/") %>
+  </div>
+  <%# Search & Filters %>
+  <div class="border-2 flex flex-row mx-auto justify-center">
+    <%# FORM %>
+    <%= f = form_for :query, "#", [phx_change: :search, class: "self-center"] %>
+      <%= search_input f, :query, [class: "border border-black p-2", placeholder: "Search"] %>
+    </form>
+    <%# ALL %>
     <div>
       <button phx-click="all" class="ml-4 px-3 py-2 text-sm font-medium text-black border border-black hover:border-white focus:border-white focus:outline-none focus:text-black focus:bg-apink">All</button>
     </div>
+    <%# POSTS %>
     <div>
       <button phx-click="posts" class="ml-4 px-3 py-2 text-sm font-medium text-black border border-black hover:border-white focus:border-white focus:outline-none focus:text-black focus:bg-apink">Posts</button>
     </div>
+    <%# COMMENTS %>
     <div>
       <button phx-click="comments" class="ml-4 px-3 py-2 text-sm font-medium text-black border border-black hover:border-white focus:border-white focus:outline-none focus:text-black focus:bg-apink">Comments</button>
     </div>
   </div>
+</div>
+
+
+<div class="absolute top-50 shadow-xl bg-apink max-w-screen-md mx-auto mx-20 p-4 border-black border-2sds">
+  
   <%# List of Saves %>
   <ol id="list" phx-update="replace" class="divide-y divide-black bg-apink list-decimal font-bold mx-10">
-    <%#= if @saves != nil do %>
     <%= for item <- @saves do %>
       
       <%# Post Format %>
@@ -62,5 +69,4 @@
       <% end %>
     <% end %>
   </ol>
-  <%# end %>
 </div>

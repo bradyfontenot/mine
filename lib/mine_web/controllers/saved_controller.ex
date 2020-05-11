@@ -35,7 +35,6 @@ defmodule MineWeb.SavedController do
        }
     
     entries ->
-      IO.inspect(entries)
       live_render(conn, MineWeb.YouSavedItLive, session: %{"saved_list" => entries} )
 
     end
