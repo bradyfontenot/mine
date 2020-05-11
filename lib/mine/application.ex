@@ -8,7 +8,7 @@ defmodule Mine.Application do
   def start(_type, _args) do
     children = [
       # Start the Ecto repository
-      Mine.Repo,
+      # Mine.Repo,
       # Start the Telemetry supervisor
       MineWeb.Telemetry,
       # Start the PubSub system
