@@ -1,8 +1,7 @@
 defmodule MineWeb.CountriesLive do
   use MineWeb, :live_view
-  
-  alias Mine.CountriesApi
 
+  alias Mine.CountriesApi
 
   @impl true
   def mount(_params, _session, socket) do
@@ -13,6 +12,4 @@ defmodule MineWeb.CountriesLive do
 
     {:ok, assign(socket, :data, "")}
   end
-
-
 end

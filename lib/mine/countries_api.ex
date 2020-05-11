@@ -5,8 +5,8 @@ defmodule Mine.CountriesApi do
   plug Tesla.Middleware.JSON
 
   def list_countries do
-   {:ok, response} = get("/all")
-   IO.inspect(response)
-   response
+    {:ok, response} = get("/all")
+    IO.inspect(response)
+    response
   end
 end

@@ -1,6 +1,6 @@
 defmodule MineWeb.SavedController do
   use MineWeb, :controller
-  
+
   import Phoenix.LiveView.Controller
 
   alias Mine.Reddit
@@ -14,7 +14,7 @@ defmodule MineWeb.SavedController do
   #       conn
   #       |> put_flash(:error, "Shit went wrong bro!")
   #       |> redirect(to: "/")
-      
+
   #     _ ->
   #       {:ok, response} = Reddit.get_user_saves(token)
   #       # json(conn, response.body)
@@ -24,20 +24,15 @@ defmodule MineWeb.SavedController do
   # end
 
   def index(conn, params) do
-
     case Reddit.get_user_saves(params["code"]) do
-    
-    {:error, "invalid_grant"} ->
-      {:ok,  
-        conn
-        |> put_flash(:error, "Shit went wrong bro!")
-        |> redirect(to: "/")
-       }
-    
-    entries ->
-      live_render(conn, MineWeb.YouSavedItLive, session: %{"saved_list" => entries} )
+      {:error, "invalid_grant"} ->
+        {:ok,
+         conn
+         |> put_flash(:error, "Shit went wrong bro!")
+         |> redirect(to: "/")}
 
+      entries ->
+        live_render(conn, MineWeb.YouSavedItLive, session: %{"saved_list" => entries})
     end
-
   end
 end
