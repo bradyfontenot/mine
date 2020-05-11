@@ -13,10 +13,56 @@ config :mine, MineWeb.Endpoint,
   http: [port: {:system, "PORT"}],
   url: [scheme: "https", host: "lit-gorge-30541.herokuapp.com", port: 443],
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
-  cache_static_manifest: "priv/static/cache_manifest.json"
+  cache_static_manifest: "priv/static/cache_manifest.json",
+  secret_key_base: secret_key_base,
+  transport_options: [socket_opts: [:inet6]]
+
+
+
+
+# config :mine, MineWeb.Endpoint,
+#   http: [
+#     port: String.to_integer(System.get_env("PORT") || "4000"),
+    
+#   ],
 
 # Do not print debug messages in production
 config :logger, level: :info
+
+
+database_url =
+  System.get_env("DATABASE_URL") ||
+    raise """
+    environment variable DATABASE_URL is missing.
+    For example: ecto://USER:PASS@HOST/DATABASE
+    """
+
+config :mine, Mine.Repo,
+  ssl: true,
+  url: database_url,
+  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10")
+
+secret_key_base =
+  System.get_env("SECRET_KEY_BASE") ||
+    raise """
+    environment variable SECRET_KEY_BASE is missing.
+    You can generate one by calling: mix phx.gen.secret
+    """
+
+reddit_api_key =
+  System.get_env("REDDIT_API_KEY") ||
+    raise """
+    environment variable REDDIT_API_KEY is missing.
+    """
+
+reddit_client_id =
+  System.get_env("REDDIT_CLIENT_ID") ||
+    raise """
+    environment variable REDDIT_API_KEY is missing.
+    """
+
+config :mine, reddit_api_key: reddit_api_key
+config :mine, reddit_client_id: reddit_client_id
 
 # ## SSL Support
 #
@@ -54,4 +100,4 @@ config :logger, level: :info
 
 # Finally import the config/prod.secret.exs which loads secrets
 # and configuration from environment variables.
-import_config "prod.secret.exs"
+# import_config "prod.secret.exs"
