@@ -11,13 +11,19 @@ defmodule Mine.Reddit do
   @api_key Application.get_env(:mine, :reddit_api_key)
   @redirect_uri "https://lit-gorge-30541.herokuapp.com/saved"
   @scope "identity history"
-  @state "temp_string"
+  # @state "temp_string"
   @duration "temporary"
-  @auth_url "https://ssl.reddit.com/api/v1/authorize?client_id=#{@client_id}&response_type=code&state=#{
-              @state
-            }&redirect_uri=#{@redirect_uri}&duration=#{@duration}&scope=#{@scope}"
 
-  def get_auth_url, do: @auth_url
+
+  # @auth_url "https://ssl.reddit.com/api/v1/authorize?client_id=#{@client_id}&response_type=code&state=#{generator()}&redirect_uri=#{@redirect_uri}&duration=#{@duration}&scope=#{@scope}"
+
+  def get_auth_url do
+    state = state_generator()
+    auth_url = 
+      "https://ssl.reddit.com/api/v1/authorize?client_id=#{@client_id}&response_type=code&state=#{state}&redirect_uri=#{@redirect_uri}&duration=#{@duration}&scope=#{@scope}"
+
+    auth_url
+ end
 
   # Client used to request token needed for authorized connection
   def client_for_token_request do
@@ -118,4 +124,20 @@ defmodule Mine.Reddit do
         {:error, "invalid_grant"}
     end
   end
+
+  # generates random string to use as query param to help verify
+  # validity of source.
+  # source: Dan Schultzer(github.com/danschultzer/generator.ex)
+  defp state_generator() do
+    min = String.to_integer("100000", 36)
+    max = String.to_integer("ZZZZZZ", 36)
+
+    max
+    |> Kernel.-(min)
+    |> :rand.uniform()
+    |> Kernel.+(min)
+    |> Integer.to_string(36)
+
+  end
+
 end
