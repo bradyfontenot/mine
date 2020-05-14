@@ -9,7 +9,7 @@ defmodule Mine.Reddit do
 
   @client_id Application.get_env(:mine, :reddit_client_id)
   @api_key Application.get_env(:mine, :reddit_api_key)
-  @redirect_uri "https://lit-gorge-30541.herokuapp.com/saved"
+  @redirect_uri "http://localhost:4000/saved"
   @scope "identity history"
   # @state "temp_string"
   @duration "temporary"
@@ -20,7 +20,7 @@ defmodule Mine.Reddit do
   def get_auth_url do
     state = state_generator()
     auth_url = 
-      "https://ssl.reddit.com/api/v1/authorize?client_id=#{@client_id}&response_type=code&state=#{state}&redirect_uri=#{@redirect_uri}&duration=#{@duration}&scope=#{@scope}"
+      "https://ssl.reddit.com/api/v1/authorize.compact?client_id=#{@client_id}&response_type=code&state=#{state}&redirect_uri=#{@redirect_uri}&duration=#{@duration}&scope=#{@scope}"
 
     auth_url
  end
