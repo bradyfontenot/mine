@@ -1,5 +1,5 @@
-<main role="main" class="container mx-auto">
+<main role="main" class="mx-auto">
   <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-  <div class="alert alert-danger text-center mx-w-full" role="alert"><%= get_flash(@conn, :error) %></div>
+  <p class="alert alert-danger text-center" role="alert"><%= get_flash(@conn, :error) %></p>
   <%= @inner_content %>
 </main>
