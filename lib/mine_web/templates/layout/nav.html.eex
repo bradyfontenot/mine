@@ -1,19 +1,6 @@
-<%#         <div class="absolute pt-3 pl-10 flex items-center">
-          <div class="flex-shrink-0 border-2 text-2xl font-extrabold">
-            <%= link("MINE", to: "/") %>
-          <%# </div> %>
-        <%# </div> %>
-<%# 
-<div class="w-screen bord">
-  <nav class="border-gray-400">
-    <div class="max-w-7xl mx-auto py-2 px-6">
-      <div class="flex flex-wrap items-center">
-        <div class="relative flex items-center">
-          <div class="text-2xl font-extrabold"> %>
-            <%#= link("MINE", to: "/") %>
-<%#           </div>
-        </div>
+
+      <div class="max-w-7xl mx-auto py-4 px-6">
+         <div class="text-2xl font-extrabold">
+           <%= link("MINE", to: "/") %>
+          </div>
       </div>
-    </div>
-  </nav>
-</div> %>
