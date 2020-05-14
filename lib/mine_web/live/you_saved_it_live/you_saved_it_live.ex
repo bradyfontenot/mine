@@ -64,8 +64,9 @@ defmodule MineWeb.YouSavedItLive do
           entry["data"]["title"],
           entry["data"]["body"]
         ])
+        |> String.downcase()
 
-      String.contains?(pattern, query) == true
+      String.contains?(pattern, String.downcase(query)) == true
     end)
   end
 end
