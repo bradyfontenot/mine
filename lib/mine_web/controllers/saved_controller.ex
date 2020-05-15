@@ -25,7 +25,7 @@ defmodule MineWeb.SavedController do
 
   def index(conn, params) do
     case Reddit.get_user_saves(params["code"]) do
-      {:error, _} ->
+      {:error, "invalid_grant"} ->
         {:ok,
          conn
          |> put_flash(:error, "Try again please. Reddit seems to be a little moody.")
