@@ -9,7 +9,7 @@ defmodule Mine.Reddit do
 
   @client_id Application.get_env(:mine, :reddit_client_id)
   @api_key Application.get_env(:mine, :reddit_api_key)
-  @redirect_uri "http://http://lit-gorge-30541.herokuapp.com/saved"
+  @redirect_uri "https://lit-gorge-30541.herokuapp.com/saved"
   @scope "identity history"
   @duration "temporary"
 
