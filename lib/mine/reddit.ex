@@ -93,7 +93,7 @@ defmodule Mine.Reddit do
     Grabs 100 entries/request (reddit limit)
     recursively until end of list is hit.
   """
-  def get_all(client, url) do
+  defp get_all(client, url) do
     case get(client, url) do
       {:ok, response} ->
         next = response.body["data"]["after"]
@@ -106,9 +106,9 @@ defmodule Mine.Reddit do
     end
   end
 
-  def get_all(_client, _url, nil), do: []
+  defp get_all(_client, _url, nil), do: []
 
-  def get_all(client, url, _next) do
+  defp get_all(client, url, _next) do
     case get(client, url) do
       {:ok, response} ->
         next = response.body["data"]["after"]
