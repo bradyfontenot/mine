@@ -1,4 +1,4 @@
-# Mine - WI
+# Mine - WIP
 
 If you save a lot of posts or comments on reddit you know it's not easy to find the old ones.  Your only option is to scroll endlessly until you find what you're looking for.
 
