@@ -15,11 +15,14 @@ defmodule Mine.Reddit do
 
   def get_auth_url do
     state = state_generator()
-    auth_url = 
-      "https://ssl.reddit.com/api/v1/authorize.compact?client_id=#{@client_id}&response_type=code&state=#{state}&redirect_uri=#{@redirect_uri}&duration=#{@duration}&scope=#{@scope}"
+
+    auth_url =
+      "https://ssl.reddit.com/api/v1/authorize.compact?client_id=#{@client_id}&response_type=code&state=#{
+        state
+      }&redirect_uri=#{@redirect_uri}&duration=#{@duration}&scope=#{@scope}"
 
     auth_url
- end
+  end
 
   # Client config to request token needed for authorized connection
   def client_for_token_request do
@@ -135,7 +138,5 @@ defmodule Mine.Reddit do
     |> :rand.uniform()
     |> Kernel.+(min)
     |> Integer.to_string(36)
-
   end
-
 end

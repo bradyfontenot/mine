@@ -27,7 +27,6 @@ config :mine, MineWeb.Endpoint,
 # Do not print debug messages in production
 config :logger, level: :info
 
-
 # database_url =
 #   System.get_env("DATABASE_URL") ||
 #     raise """
@@ -39,7 +38,6 @@ config :logger, level: :info
 #   ssl: true,
 #   url: database_url,
 #   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10")
-
 
 reddit_api_key =
   System.get_env("REDDIT_API_KEY") ||
