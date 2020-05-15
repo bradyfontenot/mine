@@ -1,4 +1,5 @@
 
+<%# Nav Bar %>
 <div class="fixed inset-x-0 top-0 flex justify-between flex-row flex-wrap items-center py-3 bg-gray-900 shadow-sm">
   <%# Home link %>
   <div class="self-center text-2xl font-bold text-gray-500 pl-5">
@@ -22,54 +23,56 @@
   </div>
 </div>
 
-<%# ******************************************************************************** %>
-
-<div class="pt-40 text-5xl font-bold text-center text-gray-500" >
-  <%# Spacer %>
+<%# Content %>
+<div class="pt-40">
 </div>
+  <div class="mx-auto shadow-xl bg-gray-900 max-w-screen-md p-2 mx-20 rounded-md text-gray-500">
 
-<div class="container shadow-xl bg-gray-900 max-w-screen-md mx-auto mx-20 p-2 rounded-md text-gray-500">
+    <%# List of Saves %>
+    <ol id="list" phx-update="replace" class="divide-y divide-gray-700 bg-opacity-0 list-decimal font-bold mx-10">
+      <%#= if @saves != nil do %>
+      <%= for item <- @saves do %>
+        
+        <%# Post Format %>
+        <%= if item["kind"] == "t3" do %>
+          <li id="<%= item["data"]["id"] %>" class="m-0 py-5">
+            <%# subreddit %>
+            <div class="py-0 -my-1 italic font-normal text-sm">
+              <%= "#{item["data"]["subreddit_name_prefixed"]}: " %>
+            </div>
+            
+            <%# Post Title %>
+            <div>
+              <a href="http://www.reddit.com<%= item["data"]["permalink"] %>" target="new"  class="font-semibold">
+                <%= raw(item["data"]["title"]) %>
+              </a>
+            </div>
+          </li>
+        <% end %>
 
-  <%# List of Saves %>
-  <ol id="list" phx-update="replace" class="divide-y divide-gray-700 bg-opacity-0 list-decimal font-bold mx-10">
-    <%#= if @saves != nil do %>
-    <%= for item <- @saves do %>
-      
-      <%# Post Format %>
-      <%= if item["kind"] == "t3" do %>
-        <li id="<%= item["data"]["id"] %>" class="m-0 py-5">
-          <%# subreddit %>
-          <div class="py-0 -my-1 italic font-normal text-sm"><%= "#{item["data"]["subreddit_name_prefixed"]}: " %></div>
-          
-          <%# Post Title %>
-          <div>
-            <a href="http://www.reddit.com<%= item["data"]["permalink"] %>" target="new"  class="font-semibold">
-              <%= raw(item["data"]["title"]) %>
-            </a>
-          </div>
-        </li>
+        <%# Comment Format %>
+        <%= if item["kind"] == "t1" do %>
+          <li id="<%= item["data"]["id"] %>" class="m-0 py-5">
+           
+           <%# subreddit %>
+            <div class="py-0 my-0 italic font-normal text-sm">
+              <%= "#{item["data"]["subreddit_name_prefixed"]}: " %>
+            </div>
+           
+            <%# Comment Title %>
+            <div class="py-0 -my-1">
+              <a href="http://www.reddit.com<%= item["data"]["permalink"] %>" target="new" class="font-semibold">
+                <%= raw(item["data"]["link_title"]) %>
+              </a>
+            </div>
+           
+            <%# Comment Body %>
+            <div class="font-serif font-normal">
+              <%= text_to_html(item["data"]["body"], [attributes: [class: "py-2 leading-tight"]]) %> 
+            </div>
+          </li>
+        <% end %>
       <% end %>
-
-      <%# Comment Format %>
-      <%= if item["kind"] == "t1" do %>
-        <li id="<%= item["data"]["id"] %>" class="m-0 py-5">
-         
-         <%# subreddit %>
-          <div class="py-0 my-0 italic font-normal text-sm">
-            <%= "#{item["data"]["subreddit_name_prefixed"]}: " %>
-          </div>
-         
-          <%# Comment Title %>
-          <div class="py-0 -my-1">
-            <a href="http://www.reddit.com<%= item["data"]["permalink"] %>" target="new" class="font-semibold"><%= raw(item["data"]["link_title"]) %></a>
-          </div>
-         
-          <%# Comment Body %>
-          <div class="font-serif font-normal">
-            <%= text_to_html(item["data"]["body"], [attributes: [class: "py-2 leading-tight"]]) %> 
-          </div>
-        </li>
-      <% end %>
-    <% end %>
-  </ol>
+    </ol>
+  </div>
 </div>
