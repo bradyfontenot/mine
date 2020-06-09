@@ -9,14 +9,21 @@ defmodule MineWeb.YouSavedItLive do
 
   @impl true
   def mount(_params, %{"saved_list" => entries}, socket) do
-    {:ok, assign(socket, saves: entries, fake_db: entries, type: "all")}
+    :ets.new(:saved_table, [:bag, :named_table])
+    :ets.insert(:saved_table, {:saved_list, entries})
+    [saved_list: entries] = :ets.lookup(:saved_table, :saved_list)
+
+    {:ok, assign(socket, saves: entries, type: "all")}
   end
 
   # filter by search term
   @impl true
   def handle_event("search", %{"query" => %{"query" => query}}, socket) do
+
+    [saved_list: entries] = :ets.lookup(:saved_table, :saved_list)
+
     filtered =
-      filter_by_type(socket.assigns.type, socket.assigns.fake_db)
+      filter_by_type(socket.assigns.type, entries)
       |> filter_by_query(query)
 
     {:noreply, assign(socket, saves: filtered)}
@@ -24,27 +31,33 @@ defmodule MineWeb.YouSavedItLive do
 
   # show all
   def handle_event("all", _, socket) do
-    {:noreply, assign(socket, saves: socket.assigns.fake_db, type: "all")}
+    [saved_list: entries] = :ets.lookup(:saved_table, :saved_list)
+
+    {:noreply, assign(socket, saves: entries, type: "all")}
   end
 
   # filter by posts
   def handle_event("posts", _, socket) do
-    filtered = filter_by_type("t3", socket.assigns.fake_db)
+    [saved_list: entries] = :ets.lookup(:saved_table, :saved_list)
+
+    filtered = filter_by_type("t3", entries)
 
     {:noreply, assign(socket, saves: filtered, type: "t3")}
   end
 
   # filter by comments
   def handle_event("comments", _, socket) do
-    filtered = filter_by_type("t1", socket.assigns.fake_db)
+    [saved_list: entries] = :ets.lookup(:saved_table, :saved_list)
+
+    filtered = filter_by_type("t1", entries)
 
     {:noreply, assign(socket, saves: filtered, type: "t1")}
   end
 
-  defp filter_by_type("all", db), do: db
+  defp filter_by_type("all", entries), do: entries
 
-  defp filter_by_type(type, db) do
-    filtered = Enum.filter(db, fn entry -> entry["kind"] == type end)
+  defp filter_by_type(type, entries) do
+    filtered = Enum.filter(entries, fn entry -> entry["kind"] == type end)
 
     case type do
       "t1" ->
@@ -55,8 +68,8 @@ defmodule MineWeb.YouSavedItLive do
     end
   end
 
-  defp filter_by_query(db, query) do
-    Enum.filter(db, fn entry ->
+  defp filter_by_query(entries, query) do
+    Enum.filter(entries, fn entry ->
       pattern =
         Enum.join([
           entry["data"]["subreddit_name_prefixed"],
