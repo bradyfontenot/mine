@@ -5,24 +5,6 @@ defmodule MineWeb.SavedController do
 
   alias Mine.Reddit
 
-  # def index(conn, params) do
-
-  # 	token = Reddit.request_token(params["code"])
-
-  #   case token do
-  #     token = "invalid_grant" -> 
-  #       conn
-  #       |> put_flash(:error, "Shit went wrong bro!")
-  #       |> redirect(to: "/")
-
-  #     _ ->
-  #       {:ok, response} = Reddit.get_user_saves(token)
-  #       # json(conn, response.body)
-  #       render(conn, "index.html", saves: response.body)
-  #   end
-
-  # end
-
   def index(conn, params) do
     case Reddit.get_user_saves(params["code"]) do
       {:error, "invalid_grant"} ->
