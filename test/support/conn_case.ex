@@ -38,6 +38,6 @@ defmodule MineWeb.ConnCase do
   #     Ecto.Adapters.SQL.Sandbox.mode(Mine.Repo, {:shared, self()})
   #   end
 
-  #   {:ok, conn: Phoenix.ConnTest.build_conn()}
+  {:ok, conn: Phoenix.ConnTest.build_conn()}
   # end
 end
