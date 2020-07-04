@@ -26,8 +26,8 @@
 
 
 env:
-  # global:
-  #   - MIX_ENV=prod
+  global:
+    - MIX_ENV=prod
 
 jobs:
   include:
