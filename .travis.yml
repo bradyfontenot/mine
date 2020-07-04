@@ -1,7 +1,34 @@
+
+# services:
+#   - docker
+
+# os:
+#   -linux
+
+# env:
+#   global:
+#     - DOCKER_IMAGE_NAME=""
+
+# before_scripts:
+
+# script:
+
+# after_script:
+
+
+# deploy:
+#   provider: s3
+#   access_key_id: "YOUR AWS ACCESS KEY"
+#   secret_access_key: "YOUR AWS SECRET KEY"
+#   bucket: "S3 Bucket"
+
+############################
+
 language: elixir
 elixir:
   - '1.10.3'
 otp_release:
   - '22.0'
 
+MIX_ENV=prod
 install: mix local.hex --force; mix deps.get
