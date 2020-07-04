@@ -33,6 +33,10 @@ env:
   global:
     - MIX_ENV=prod
 
+cache:
+  directories:
+    - deps
+
 install: 
   - mix local.hex --force
   - mix local.rebar --force
