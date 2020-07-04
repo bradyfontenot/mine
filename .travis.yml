@@ -32,5 +32,8 @@ otp_release:
 env:
   global:
     - MIX_ENV=prod
-    
-install: mix local.hex --force; mix deps.get
+
+install: 
+  - mix local.hex --force
+  - mix local.rebar --force
+  - mix deps.get
