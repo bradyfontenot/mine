@@ -29,6 +29,8 @@ elixir:
   - '1.10.3'
 otp_release:
   - '22.0'
-
-MIX_ENV=prod
+env:
+  global:
+    - MIX_ENV=prod
+    
 install: mix local.hex --force; mix deps.get
