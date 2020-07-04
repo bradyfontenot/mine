@@ -24,20 +24,29 @@
 
 ############################
 
-language: elixir
-elixir:
-  - '1.10.3'
-otp_release:
-  - '22.0'
+
 env:
-  global:
-    - MIX_ENV=prod
+  # global:
+  #   - MIX_ENV=prod
 
-# cache:
-#   directories:
-#     - deps
+jobs:
+  include:
+    - stage: "Tests"
+      name: "Unit Tests"
+      language: elixir
+      elixir:
+        - '1.10.3'
+      otp_release:
+        - '22.0'
+      cache:
+        directories:
+          - deps
 
-install: 
-  - mix local.hex --force
-  - mix local.rebar --force
-  - mix deps.get
+      install: 
+        - mix local.hex --force
+        - mix local.rebar --force
+        - mix deps.get
+        - nvm install 12.4.0 && nvm use 12.4.0
+        - npm install --prefix assets
+      script:
+        MIX_ENV=test mix test
