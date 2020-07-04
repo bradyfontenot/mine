@@ -33,9 +33,9 @@ env:
   global:
     - MIX_ENV=prod
 
-cache:
-  directories:
-    - deps
+# cache:
+#   directories:
+#     - deps
 
 install: 
   - mix local.hex --force
