@@ -31,13 +31,13 @@ defmodule MineWeb.ConnCase do
     end
   end
 
-  setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Mine.Repo)
+  # setup tags do
+  #   :ok = Ecto.Adapters.SQL.Sandbox.checkout(Mine.Repo)
 
-    unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Mine.Repo, {:shared, self()})
-    end
+  #   unless tags[:async] do
+  #     Ecto.Adapters.SQL.Sandbox.mode(Mine.Repo, {:shared, self()})
+  #   end
 
-    {:ok, conn: Phoenix.ConnTest.build_conn()}
-  end
+  #   {:ok, conn: Phoenix.ConnTest.build_conn()}
+  # end
 end
