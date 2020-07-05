@@ -58,7 +58,7 @@ reddit_redirect_uri =
     """
 config :mine, reddit_api_key: reddit_api_key
 config :mine, reddit_client_id: reddit_client_id
-cofing :mine, reddit_redirect_uri: reddit_redirect_uri
+config :mine, reddit_redirect_uri: reddit_redirect_uri
 
 # ## SSL Support
 #
