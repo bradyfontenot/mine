@@ -23,6 +23,8 @@
 #   bucket: "S3 Bucket"
 
 ############################
+language: generic
+
 sudo: required
 git:
   depth: false
@@ -65,7 +67,7 @@ jobs:
 
     - stage: aws
       name: 'deploy aws'
-      if: branch = master
+      # if: branch = master
       provider: elasticbeanstalk
       region: us-east-2
       app: mine
@@ -73,7 +75,7 @@ jobs:
       bucket_name: elasticbeanstalk-us-east-2-560687854181
       bucket_path: mine
       on:
-        branch: master
+        branch: 16-add-ets
       access_key_id: $AWS_ACCESS_KEY
       secret_access_key: $AWS_SECRET_KEY
       
