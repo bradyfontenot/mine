@@ -72,7 +72,7 @@ jobs:
         provider: elasticbeanstalk
         region: us-east-2
         app: mine
-        env: mine-env
+        env: Mine-env
         bucket_name: elasticbeanstalk-us-east-2-560687854181
         bucket_path: mine
         on:
