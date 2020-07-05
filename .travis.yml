@@ -55,8 +55,8 @@ jobs:
       script:
         MIX_ENV=test mix test
     
-    - stage: docker build
-      name: 'Deploy'
+    - stage: docker
+      name: 'deploy docker'
       before_install:
         docker build -t btfontenot/mine:0.1.0 .
       script:
@@ -64,7 +64,18 @@ jobs:
         - docker push btfontenot/mine:0.1.0
 
       # if: branch = master
-      
+    - stage: aws
+      name: 'deploy aws'
+      provider: elasticbeanstalk
+      region: us-east-2
+      app: mine
+      env: mine-env
+      bucket_name: elasticbeanstalk-us-east-2-560687854181
+      bucket_path: mine
+      on:
+        branch: master
+      access_key_id: $AWS_ACCESS_KEY
+      secret_access_key: $AWS_SECRET_KEY
       
       
       
