@@ -2,16 +2,16 @@
   "AWSEBDockerrunVersion" : 1,
   "containerDefinitions": [ 
      { 
-        "essential": true,
-        "image": "btfontenot/mine:0.1.0",
         "name": "mine",
+        "image": "btfontenot/mine:0.1.0",
+        "essential": true, 
         "portMappings": [ 
            { 
               "containerPort": 8888,
               "hostPort": 80
            }
         ],
-        "memory": "512"
+        "memory": 512
      }
   ]
 }
