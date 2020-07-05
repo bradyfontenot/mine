@@ -51,8 +51,14 @@ reddit_client_id =
     environment variable REDDIT_API_KEY is missing.
     """
 
+reddit_redirect_uri =
+  System.get_env("REDDIT_REDIRECT_URI") ||
+    raise """
+    environment variable REDDIT_REDIRECT_URI is missing.
+    """
 config :mine, reddit_api_key: reddit_api_key
 config :mine, reddit_client_id: reddit_client_id
+cofing :mine, reddit_redirect_uri: reddit_redirect_uri
 
 # ## SSL Support
 #
