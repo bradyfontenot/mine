@@ -1,5 +1,5 @@
 {
-  "AWSEBDockerrunVersion" : 2,
+  "AWSEBDockerrunVersion" : 1,
   "containerDefinitions": [ 
      { 
         "essential": true,
@@ -15,18 +15,18 @@
         "name": "mine",
         "portMappings": [ 
            { 
-              "containerPort": 80,
+              "containerPort": 8888,
               "hostPort": 80,
               "protocol": "tcp"
            }
         ]
      }
   ],
-  "executionRoleArn": "arn:aws:iam::012345678910:role/ecsTaskExecutionRole",
-  "family": "fargate-task-definition",
+//   "executionRoleArn": "arn:aws:iam::012345678910:role/ecsTaskExecutionRole",
+//   "family": "fargate-task-definition",
   "memory": "512",
-  "networkMode": "awsvpc",
-  "requiresCompatibilities": [ 
-    "FARGATE" 
-  ]
+//   "networkMode": "awsvpc",
+//   "requiresCompatibilities": [ 
+//     "FARGATE" 
+//   ]
 }
