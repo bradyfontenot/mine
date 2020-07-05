@@ -1,7 +1,96 @@
-language: elixir
-elixir:
-  - '1.10.3'
-otp_release:
-  - '22.0'
 
-install: mix local.hex --force; mix deps.get
+# services:
+#   - docker
+
+# os:
+#   -linux
+
+# env:
+#   global:
+#     - DOCKER_IMAGE_NAME=""
+
+# before_scripts:
+
+# script:
+
+# after_script:
+
+
+# deploy:
+#   provider: s3
+#   access_key_id: "YOUR AWS ACCESS KEY"
+#   secret_access_key: "YOUR AWS SECRET KEY"
+#   bucket: "S3 Bucket"
+
+############################
+sudo: required
+git:
+  depth: false
+
+services:
+  - docker
+
+env:
+  global:
+    - MIX_ENV=prod
+
+jobs:
+  include:
+    - stage: "Tests"
+      name: "Unit Tests"
+      language: elixir
+      elixir:
+        - '1.10.3'
+      otp_release:
+        - '22.0'
+      cache:
+        directories:
+          - deps
+      install: 
+        - mix local.hex --force
+        - mix local.rebar --force
+        - mix deps.get
+        - nvm install 12.4.0 && nvm use 12.4.0
+        - npm install --prefix assets
+      script:
+        MIX_ENV=test mix test
+    
+    - stage: docker
+      name: 'deploy docker'
+      before_install:
+        docker build -t btfontenot/mine:0.1.0 .
+      script:
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        - docker push btfontenot/mine:0.1.0
+
+    - stage: aws
+      name: 'deploy aws'
+      if: branch = master
+      provider: elasticbeanstalk
+      region: us-east-2
+      app: mine
+      env: mine-env
+      bucket_name: elasticbeanstalk-us-east-2-560687854181
+      bucket_path: mine
+      on:
+        branch: master
+      access_key_id: $AWS_ACCESS_KEY
+      secret_access_key: $AWS_SECRET_KEY
+      
+      
+      
+      
+      
+      
+      
+      #########################
+      # script: skip
+      # before_deploy:
+      #   - echo $DOCKER_PASSWORD | docker login harbor.revelry-prod.revelry.net -u $DOCKER_USERNAME --password-stdin
+      # after_deploy:
+      #   - ./bin/rollbar_release succeeded
+      # deploy:
+      #   provider: script
+      #   script: bin/docker_pub . library/app-template harbor.revelry-prod.revelry.net
+      #   on:
+      #     branch: master
