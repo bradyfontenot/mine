@@ -2,10 +2,6 @@
   "AWSEBDockerrunVersion" : 2,
   "containerDefinitions": [ 
      { 
-        "entryPoint": [
-           "sh",
-           "-c"
-        ],
         "essential": true,
         "image": "btfontenot/mine:0.1.0",
         "logConfiguration": { 
