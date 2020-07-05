@@ -68,16 +68,17 @@ jobs:
     - stage: aws
       name: 'deploy aws'
       # if: branch = master
-      provider: elasticbeanstalk
-      region: us-east-2
-      app: mine
-      env: mine-env
-      bucket_name: elasticbeanstalk-us-east-2-560687854181
-      bucket_path: mine
-      on:
-        branch: 16-add-ets
-      access_key_id: $AWS_ACCESS_KEY
-      secret_access_key: $AWS_SECRET_KEY
+      deploy:
+        provider: elasticbeanstalk
+        region: us-east-2
+        app: mine
+        env: mine-env
+        bucket_name: elasticbeanstalk-us-east-2-560687854181
+        bucket_path: mine
+        on:
+          branch: 16-add-ets
+        access_key_id: $AWS_ACCESS_KEY
+        secret_access_key: $AWS_SECRET_KEY
       
       
       
