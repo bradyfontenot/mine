@@ -71,10 +71,10 @@ jobs:
       deploy:
         provider: elasticbeanstalk
         region: us-east-2
-        app: mine
-        env: Mine-env
+        app: mine_app
+        env: MineApp-env
         bucket_name: elasticbeanstalk-us-east-2-560687854181
-        bucket_path: mine
+        bucket_path: mine_app
         on:
           branch: 16-add-ets
         access_key_id: $AWS_ACCESS_KEY
