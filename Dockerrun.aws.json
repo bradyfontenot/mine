@@ -1,14 +1,14 @@
 {
-  "AWSEBDockerrunVersion": 1,
+  "AWSEBDockerrunVersion": "1",
    "Image": {
       "Name": "btfontenot/mine:0.1.0",
       "Update": "true"
    },
    "Ports": [ 
       { 
-         "ContainerPort": 4000,
-         "HostPort": 0
+         "ContainerPort": "4000",
+         "HostPort": "80"
       }
    ],
-   "memory": 512
+   "memory": "512"
 }
