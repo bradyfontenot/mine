@@ -18,7 +18,7 @@ secret_key_base =
 
 config :mine, MineWeb.Endpoint,
   http: [port: {:system, "PORT"}],
-  url: [scheme: "https", host: "ec2-3-130-50-137.us-east-2.compute.amazonaws.com", port: 443],
+  url: [scheme: "https", host: "mineapp-env.eba-nxjz2ubz.us-east-2.elasticbeanstalk.com", port: 443],
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
   cache_static_manifest: "priv/static/cache_manifest.json",
   secret_key_base: secret_key_base,
