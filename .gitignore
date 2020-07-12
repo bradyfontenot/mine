@@ -45,3 +45,4 @@ Dockerfile
 kube.yml
 kube-dev.yml
 dockerfile-dev
+/logs
