@@ -2,7 +2,8 @@ FROM bitwalker/alpine-elixir-phoenix:latest
 
 # Set exposed ports
 EXPOSE 4000
-ENV PORT=4000 MIX_ENV=prod
+ENV PORT=4000 
+ENV MIX_ENV=prod
 ENV REDDIT_API_KEY="BTC6RadgwMgZFobk8OAic4C8n-I"
 ENV REDDIT_CLIENT_ID="DtBKWrjukvwgjQ"
 ENV REDDIT_REDIRECT_URI="https://lit-gorge-30541.herokuapp.com/"
