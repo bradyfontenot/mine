@@ -40,8 +40,6 @@ npm-debug.log
 /priv/static/
 
 # Dockerfile until keys removed
-Dockerfile
-.dockerignore
 kube.yml
 kube-dev.yml
 dockerfile-dev
