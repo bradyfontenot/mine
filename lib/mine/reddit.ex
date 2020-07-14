@@ -92,10 +92,10 @@ defmodule Mine.Reddit do
     end
   end
 
-  @doc """
-    Grabs 100 entries/request (reddit limit)
-    recursively until end of list is hit.
-  """
+
+  # Grabs 100 entries/request (reddit limit)
+  # recursively until end of list is hit.
+
   defp get_all(client, url) do
     case get(client, url) do
       {:ok, response} ->
@@ -124,11 +124,11 @@ defmodule Mine.Reddit do
     end
   end
 
-  @doc """
-  generates random string to use as query param to help verify
-  validity of source.
-  source: Dan Schultzer(github.com/danschultzer/generator.ex)
-  """
+
+  # generates random string to use as query param to help verify
+  # validity of source.
+  # source: Dan Schultzer(github.com/danschultzer/generator.ex)
+
   defp state_generator() do
     min = String.to_integer("100000", 36)
     max = String.to_integer("ZZZZZZ", 36)
