@@ -53,8 +53,10 @@ and follow the directions for creating an app.
 8. Add `import_config "dev.secret.exs"` to the bottom of `dev.exs` if not already there. (should be though).
 9. In the terminal, run the following commands
    * `mix deps.get`
+   * `cmd npm install --prefix assets`
    * `mix phx.server`
 10.  Visit localhost:4000 in your browser and the app should load
+11.  After installation/setup, only `mix phx.server` is needed to start the app
 
 ## Deploy to Production
 If you would like to deploy to production you can create a release by following the guide linked below in combination with your hosting service requirements: \
