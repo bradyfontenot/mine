@@ -8,6 +8,16 @@ I thought it would be a great exercise to get more familiar with LiveView and El
 
 Mine is a basic website that connects to your reddit account and loads all of your saved posts and comments.  It enables you to filter by type(post or comment) or search the contents of titles and comment bodies. All doable in realtime thanks to Phoenix LiveView. Mine does not store any user data permanently. In order avoid having the call the api everytime you search/filter, Mine uses ETS (Erlang Term Storage) to cache data from the initial request so it remains available during the session.
 
+## Features
+1. View all (most recent saves appear first)
+2. View only Posts (sorted alphabetically by subreddit name)
+3. View only Comments (most recent saves appear first)
+4. Combined filter/search
+   * all / text search
+   * posts / text search
+   * comments / text search
+
+
 ## Installation
 1. Install elixir and OTP if you don't already have it. (see `mix.exs` for versions)
 2. Clone the repository to your local drive
@@ -53,9 +63,9 @@ If you would like to deploy to production you can create a release by following 
 As is, the app is set up to deploy via a CI/CD pipeline using Travis, Docker, and AWS Elastic Beanstalk. However, it can be easily modified to run on Heroku alone without Docker & Travis CI by adding/changing a few settings in the config files. The release guide linked previously has some info on Heroku realeases.
 
 ## Future Improvements
-The current implementation of ETS for caching is extremely simple, running only in the Liveview file.  Due to this, the api client must request and store all saved data before storing it in ETS and loading the page. This requires multiple requests in a row because reddit limits responses to only 25 entries per request.  Ideally, ETS would be implemented in it's own process so that it would be accessible during requests and the site could serve results from each request as they come in instead of waiting to load them all at once.
-
-I believe the implementation of several functions in the api client module (`reddit.ex`) have the potential to be improved upon. Additionally, the app would benefit from typespecs being implemented.
+1. The current implementation of ETS for caching is extremely simple, running only in the Liveview file.  Due to this, the api client must request and store all saved data before storing it in ETS and loading the page. This requires multiple requests in a row because reddit limits responses to only 25 entries per request.  Ideally, ETS would be implemented in it's own process so that it would be accessible during requests and the site could serve results from each request as they come in instead of waiting to load them all at once.
+2. Add multiple sorting options. i.e. alphabetically, date saved, subreddit name, etc...
+3. I believe the implementation of several functions in the api client module (`reddit.ex`) have the potential to be improved upon. Additionally, the app would benefit from typespecs being implemented.
 
 **Inspiration:** \
 This project was orginally inspired by this post on reddit:
