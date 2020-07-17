@@ -47,3 +47,4 @@ dockerfile-dev
 /logs
 /docker
 secret.txt
+.dockerignore
