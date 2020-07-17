@@ -7,19 +7,25 @@ defmodule Mine.Reddit do
   """
   use Tesla
 
-  @client_id Application.get_env(:mine, :reddit_client_id)
-  @api_key Application.get_env(:mine, :reddit_api_key)
-  @redirect_uri Application.get_env(:mine, :reddit_redirect_uri)
   @scope "identity history"
   @duration "temporary"
+
+  defp client_id, do:
+    Application.fetch_env!(:mine, :reddit_client_id)
+
+  defp api_key, do:
+    Application.fetch_env!(:mine, :reddit_api_key)
+
+  defp redirect_uri, do:
+    Application.fetch_env!(:mine, :reddit_redirect_uri)
 
   def get_auth_url do
     state = state_generator()
 
     auth_url =
-      "https://ssl.reddit.com/api/v1/authorize.compact?client_id=#{@client_id}&response_type=code&state=#{
+      "https://ssl.reddit.com/api/v1/authorize.compact?client_id=#{client_id()}&response_type=code&state=#{
         state
-      }&redirect_uri=#{@redirect_uri}&duration=#{@duration}&scope=#{@scope}"
+      }&redirect_uri=#{redirect_uri()}&duration=#{@duration}&scope=#{@scope}"
 
     auth_url
   end
@@ -27,7 +33,7 @@ defmodule Mine.Reddit do
   # Client config to request token needed for authorized connection
   def client_for_token_request do
     middleware = [
-      {Tesla.Middleware.BasicAuth, username: @client_id, password: @api_key},
+      {Tesla.Middleware.BasicAuth, username: client_id(), password: api_key()},
       Tesla.Middleware.JSON,
       {Tesla.Middleware.Headers,
        [
@@ -42,7 +48,7 @@ defmodule Mine.Reddit do
   def request_token(code) do
     client = client_for_token_request()
     uri = "https://www.reddit.com/api/v1/access_token"
-    body = "grant_type=authorization_code&code=#{code}&redirect_uri=#{@redirect_uri}"
+    body = "grant_type=authorization_code&code=#{code}&redirect_uri=#{redirect_uri()}"
 
     case post(client, uri, body) do
       {:ok, %{body: %{"access_token" => _}}} = {:ok, response} ->
