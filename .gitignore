@@ -22,7 +22,6 @@ erl_crash.dump
 #Environment Variables
 *.env
 
-
 # Also ignore archive artifacts (built via "mix archive.build").
 *.ez
 
@@ -48,3 +47,4 @@ dockerfile-dev
 /docker
 secret.txt
 .dockerignore
+/old
