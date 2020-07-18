@@ -7,13 +7,9 @@
 # General application configuration
 use Mix.Config
 
-config :mine,
-  ecto_repos: [Mine.Repo]
-
 # Configures the endpoint
 config :mine, MineWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "tyM/chXu25apDbBhPzSk0pcXu+g2z0Nj5oEoxKShVp8QAt5rMWqGcVR3c/8v3YKS",
   render_errors: [view: MineWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: Mine.PubSub,
   live_view: [signing_salt: "nWId58IH"]

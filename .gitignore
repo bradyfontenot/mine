@@ -6,7 +6,7 @@
 
 # Secret config files
 /config/*.secret.exs
-
+/config/releases.exs
 # The directory Mix downloads your dependencies sources to.
 /deps/
 
@@ -20,7 +20,7 @@
 erl_crash.dump
 
 #Environment Variables
-.env
+*.env
 
 # Also ignore archive artifacts (built via "mix archive.build").
 *.ez
@@ -40,5 +40,11 @@ npm-debug.log
 /priv/static/
 
 # Dockerfile until keys removed
-# Dockerfile
-# .dockerignore
+kube.yml
+kube-dev.yml
+dockerfile-dev
+/logs
+/docker
+secret.txt
+.dockerignore
+/old
