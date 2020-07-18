@@ -48,3 +48,4 @@ dockerfile-dev
 secret.txt
 .dockerignore
 /old
+dockerrun.aws.json
