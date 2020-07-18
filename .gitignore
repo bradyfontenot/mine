@@ -39,7 +39,7 @@ npm-debug.log
 # this depending on your deployment strategy.
 /priv/static/
 
-# Dockerfile until keys removed
+# Misc. clean up later
 kube.yml
 kube-dev.yml
 dockerfile-dev
