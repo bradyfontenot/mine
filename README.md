@@ -1,7 +1,5 @@
 # Mine - WIP
 
-### Live Version -> [BetterReddit](http://betterreddit.app)
-
 Mine solves a really annoying problem. If you save a lot of posts or comments on reddit you know it's not easy to find the old ones.  Your only option is to scroll endlessly until you find what you're looking for. This is really painful if you have a lot of posts saved.
 
 I thought it would be a great exercise to get more familiar with LiveView and Elixir while also being something I could use myself.
