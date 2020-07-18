@@ -1,28 +1,5 @@
+language: generic
 
-# services:
-#   - docker
-
-# os:
-#   -linux
-
-# env:
-#   global:
-#     - DOCKER_IMAGE_NAME=""
-
-# before_scripts:
-
-# script:
-
-# after_script:
-
-
-# deploy:
-#   provider: s3
-#   access_key_id: "YOUR AWS ACCESS KEY"
-#   secret_access_key: "YOUR AWS SECRET KEY"
-#   bucket: "S3 Bucket"
-
-############################
 sudo: required
 git:
   depth: false
@@ -33,6 +10,7 @@ services:
 env:
   global:
     - MIX_ENV=prod
+    - DOCKER_IMAGE_NAME="btfontenot/mine:0.1.0"
 
 jobs:
   include:
@@ -57,40 +35,25 @@ jobs:
     
     - stage: docker
       name: 'deploy docker'
+      if: branch = master
       before_install:
-        docker build -t btfontenot/mine:0.1.0 .
+        # docker build -t btfontenot/mine:0.1.0 .
+        docker-compose build
       script:
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-        - docker push btfontenot/mine:0.1.0
+        - docker push DOCKER_IMAGE_NAME
 
     - stage: aws
       name: 'deploy aws'
       if: branch = master
-      provider: elasticbeanstalk
-      region: us-east-2
-      app: mine
-      env: mine-env
-      bucket_name: elasticbeanstalk-us-east-2-560687854181
-      bucket_path: mine
-      on:
-        branch: master
-      access_key_id: $AWS_ACCESS_KEY
-      secret_access_key: $AWS_SECRET_KEY
-      
-      
-      
-      
-      
-      
-      
-      #########################
-      # script: skip
-      # before_deploy:
-      #   - echo $DOCKER_PASSWORD | docker login harbor.revelry-prod.revelry.net -u $DOCKER_USERNAME --password-stdin
-      # after_deploy:
-      #   - ./bin/rollbar_release succeeded
-      # deploy:
-      #   provider: script
-      #   script: bin/docker_pub . library/app-template harbor.revelry-prod.revelry.net
-      #   on:
-      #     branch: master
+      deploy:
+        provider: elasticbeanstalk
+        region: us-east-2
+        app: mine_app
+        env: MineApp-env
+        bucket_name: elasticbeanstalk-us-east-2-560687854181
+        bucket_path: mine_app
+        on:
+          branch: master
+        access_key_id: $AWS_ACCESS_KEY
+        secret_access_key: $AWS_SECRET_KEY

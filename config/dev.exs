@@ -9,6 +9,14 @@ config :mine, Mine.Repo,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
+  secret_key_base =
+    System.get_env("SECRET_KEY_BASE") ||
+      raise """
+      environment variable SECRET_KEY_BASE is missing.
+      You can generate one by calling: mix phx.gen.secret
+      """
+  config :mine, secret_key_base: secret_key_base
+
 # For development, we disable any cache and enable
 # debugging and code reloading.
 #
@@ -20,6 +28,7 @@ config :mine, MineWeb.Endpoint,
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
+  secret_key_base: secret_key_base,
   watchers: [
     node: [
       "node_modules/webpack/bin/webpack.js",

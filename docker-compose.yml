@@ -1,0 +1,10 @@
+version: "2"
+
+services:
+  mine: 
+    image: btfontenot/mine:0.1.0
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    env_file: docker.env
+    ports: ["3000"]

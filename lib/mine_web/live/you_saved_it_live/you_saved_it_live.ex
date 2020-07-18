@@ -19,7 +19,6 @@ defmodule MineWeb.YouSavedItLive do
   # filter by search term
   @impl true
   def handle_event("search", %{"query" => %{"query" => query}}, socket) do
-
     [saved_list: entries] = :ets.lookup(:saved_table, :saved_list)
 
     filtered =
