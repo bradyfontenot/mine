@@ -1,7 +1,6 @@
 # Mine - WIP
 
-## Site is Live Here:
-[Mine](http://mineapp-env.eba-nxjz2ubz.us-east-2.elasticbeanstalk.com/)
+### Visit Site => [Mine](http://mineapp-env.eba-nxjz2ubz.us-east-2.elasticbeanstalk.com/)
 
 ![demo](demo.gif)  
 
