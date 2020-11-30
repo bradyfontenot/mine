@@ -19,7 +19,7 @@ Mine is a basic website that connects to your reddit account and loads all of yo
    * comments / text search
 
 
-## Installation
+## Installation(needs some updates)
 1. Install elixir and OTP if you don't already have it. (see `mix.exs` for versions)
 2. Clone the repository to your local drive
 3. Visit [Reddit API Wiki](https://www.reddit.com/wiki/api), register for an API KEY 
