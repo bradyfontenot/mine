@@ -1,5 +1,5 @@
 # Mine. A useful Reddit utility
-### Visit Site => [Mine](http://mineapp-env.eba-nxjz2ubz.us-east-2.elasticbeanstalk.com/)
+### Demo: [Mine](http://mineapp-env.eba-nxjz2ubz.us-east-2.elasticbeanstalk.com/)
 
 ![demo](demo.gif)  
 
