@@ -2,9 +2,7 @@ defmodule MineWeb.YouSavedItLive do
   use MineWeb, :live_view
 
   @moduledoc """
-    REDO using cache or local-storage: 
-    currently storing entries twice.  using assigns as a temporary db
-    of sorts to store unmolested list of entries for search/filter.
+  
   """
 
   @impl true
